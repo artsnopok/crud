@@ -1,48 +1,45 @@
 package web.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import web.models.User;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Component
-public class UserDaoImp implements UserDao {
-    private long USERS_COUNT;
-    private List<User> users;
+@Transactional(readOnly = true)
+public class UserDaoImp implements UserService {
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    {
-        users = new ArrayList<>();
-        users.add(new User(++USERS_COUNT, "Дима", "Дима", 32));
-        users.add(new User(++USERS_COUNT, "Артем", "Артем", 26));
-        users.add(new User(++USERS_COUNT, "Настя", "Настя", 25));
-        users.add(new User(++USERS_COUNT, "Гена", "Гена", 60));
-
-    }
-
+    @Override
     public List<User> index() {
-        return users;
+        return entityManager.createQuery("from User").getResultList();
     }
 
-    public User show(int id) {
-        return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
+    @Override
+    public User show(long id) {
+        return entityManager.find(User.class, id);
     }
 
+    @Override
+    @Transactional
     public void save(User user) {
-        user.setId(++USERS_COUNT);
-        users.add(user);
+        entityManager.persist(user);
     }
 
-    public void update(int id, User updatedUser) {
-        User userToBeUpdated = show(id);
-        userToBeUpdated.setName(updatedUser.getName());
-        userToBeUpdated.setSurname(updatedUser.getSurname());
-        userToBeUpdated.setAge(updatedUser.getAge());
+    @Override
+    @Transactional
+    public void update(User user) {
+        entityManager.merge(user);
     }
 
-
+    @Override
+    @Transactional
     public void delete(long id) {
-        users.removeIf(p -> p.getId()==id);
+        entityManager.remove(entityManager.find(User.class, id));
     }
 }

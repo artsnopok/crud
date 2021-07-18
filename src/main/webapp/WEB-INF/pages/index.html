@@ -9,19 +9,29 @@
 <table border="1">
     <tr>
         <th>id</th>
-        <th>name</th>
-        <th>surname</th>
-        <th>age</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>email</th>
     </tr>
 
-        <tr th:each="user : ${users}">
-            <td th:utext="${user.getId}">id</td>
-            <td>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getId}">id</td>
+        <td>
             <a th:href="@{/users/{id}(id=${user.getId()})}" th:utext="${user.getName}">name</a>
-            </td>
-            <td th:utext="${user.getSurname}">surname</td>
-            <td th:utext="${user.getAge}">age</td>
-        </tr>
+        </td>
+        <td th:utext="${user.getSurname}">surname</td>
+        <td th:utext="${user.getAge}">age</td>
+        <td th:utext="${user.getEmail}">email</td>
+        <td>
+            <form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
+                <input type="submit" value="Изменить"/>
+            </form>
+            <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
+    </tr>
 
 </table>
 
@@ -30,10 +40,9 @@
 <hr/>
 
 <form th:method="GET" th:action="@{/users/new}">
-    <input type="submit" value="Create new user"/>
+    <input type="submit" value="Создать нового юзера"/>
 </form>
 
-<!--<a href="">Create new person</a>-->
 
 </body>
 </html>

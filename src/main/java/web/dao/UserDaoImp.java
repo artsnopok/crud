@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 @Transactional(readOnly = true)
-public class UserDaoImp implements UserService {
+public class UserDaoImp implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;

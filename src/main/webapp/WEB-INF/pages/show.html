@@ -5,11 +5,21 @@
     <title>User</title>
 </head>
 <body>
-<p th:text="ID: " th:text="${user.getId()}">VALUE</p>
-<p th:text="Имя: " th:text="${user.getName()}">VALUE</p>
-<p th:text="Фамилия: " th:text="${user.getSurname()}">VALUE</p>
-<p th:text="Возраст: " th:text="${user.getAge()}">VALUE</p>
-<p th:text="Эл. почта: " th:text="${user.getEmail()}">VALUE</p>
+<label for="ID">ID: </label>
+<a th:text="${user.getId()}" id="ID">VALUE</a>
+<br/>
+<label for="name">Имя: </label>
+<a th:text="${user.getName()}" id="name">VALUE</a>
+<br/>
+<label for="surname">Фамилия: </label>
+<a th:text="${user.getSurname()}" id="surname">VALUE</a>
+<br/>
+<label for="age">Возраст: </label>
+<a th:text="${user.getAge()}" id="age">VALUE</a>
+<br/>
+<label for="email">Email: </label>
+<a th:text="${user.getEmail()}" id="email">VALUE</a>
+<br/>
 
 <form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
     <input type="submit" value="Изменить"/>

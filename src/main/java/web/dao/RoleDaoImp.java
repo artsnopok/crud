@@ -3,55 +3,52 @@ package web.dao;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import web.models.Role;
-import web.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Component
 @Transactional(readOnly = true)
-public class UserDaoImp implements UserDao {
+public class RoleDaoImp implements RoleDao {
 
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<User> index() {
-        return entityManager.createQuery("from User").getResultList();
+    public List<Role> index() {
+        return entityManager.createQuery("from Role").getResultList();
     }
 
     @Override
-    public User show(long id) {
-        return entityManager.find(User.class, id);
+    public Role findRoleById(long id) {
+        return entityManager.find(Role.class, id);
     }
 
     @Override
     @Transactional
-    public boolean save(User user) {
-        entityManager.persist(user);
+    public boolean save(Role role) {
+        entityManager.persist(role);
         return true;
     }
 
     @Override
     @Transactional
-    public void update(User updatedUser) {
-        entityManager.merge(updatedUser);
+    public void update(Role role) {
+        entityManager.merge(role);
     }
 
     @Override
     @Transactional
     public void delete(long id) {
-        entityManager.remove(entityManager.find(User.class, id));
+        entityManager.remove(entityManager.find(Role.class, id));
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return entityManager.createQuery("from User where email = :email", User.class)
-                .setParameter("email", email)
+    public Role findRoleByName(String name) {
+        return entityManager.createQuery("from Role where name = :name", Role.class)
+                .setParameter("name", name)
                 .getResultList()
                 .stream()
                 .findAny()

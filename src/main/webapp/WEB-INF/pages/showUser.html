@@ -29,16 +29,16 @@
 </span>
 
 
-<form th:method="GET" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}">
-    <span><input type="submit" value="Изменить"/></span>
-</form>
-<br/>
-<br/>
-<form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.getId()})}">
-    <span><input type="submit" value="Удалить"/></span>
-</form>
-<br/>
-<br/>
+<!--<form th:method="GET" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}">-->
+<!--    <span><input type="submit" value="Изменить"/></span>-->
+<!--</form>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.getId()})}">-->
+<!--    <span><input type="submit" value="Удалить"/></span>-->
+<!--</form>-->
+<!--<br/>-->
+<!--<br/>-->
 <form th:method="GET" th:action="@{/logout}">
     <input type="submit" value="Выйти"/>
 </form>

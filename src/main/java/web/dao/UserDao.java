@@ -9,9 +9,11 @@ public interface UserDao {
 
     User show(long id);
 
-    void save(User user);
+    boolean save(User user);
 
     void update(User user);
 
     void delete(long id);
+
+    User findUserByEmail(String email);
 }

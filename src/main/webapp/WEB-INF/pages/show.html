@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>User</title>
+    <title>Пользователь</title>
 </head>
 <body>
 <label for="ID"><b>ID: </b></label>
@@ -28,12 +28,9 @@
     <span th:text="${role.getFormattedRoleName}">roles</span>
 </span>
 
-
 <form th:method="GET" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}">
     <span><input type="submit" value="Изменить"/></span>
 </form>
-<br/>
-<br/>
 <form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.getId()})}">
     <span><input type="submit" value="Удалить"/></span>
 </form>

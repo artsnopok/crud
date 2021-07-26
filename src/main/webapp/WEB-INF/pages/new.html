@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>New user</title>
+    <title>Создание нового пользователя</title>
 </head>
 <body>
 <form th:method="POST" th:action="@{/admin/users}" th:object="${user}">
@@ -26,9 +26,9 @@
     <input type="password" th:field="*{password}" id="password"/>
     <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</span>
     <br/>
-    <input type="checkbox" th:field="*{roles}" th:text="ADMIN" th:value="${roleAdmin.getName()}">
-    <input type="checkbox" th:field="*{roles}" th:text="USER" th:value="${roleUser.getName()}">
-    <br/>
+    <input type="checkbox" th:field="*{roles}" th:text="Администратор" th:value="${roleAdmin.getName()}">
+    <input type="checkbox" th:field="*{roles}" th:text="Пользователь" th:value="${roleUser.getName()}">
+    <span style="color: red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">roles error</span>
     <br/>
     <input type="submit" value="Создать!"/>
 </form>

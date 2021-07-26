@@ -51,8 +51,10 @@ public class AdminController {
 
     @PostMapping("/users")
     public String create(@ModelAttribute("user") @Valid User user,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("roleAdmin", userService.findRoleById(1));
+            model.addAttribute("roleUser", userService.findRoleById(2));
             return "new";
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -69,10 +71,11 @@ public class AdminController {
     }
 
     @PatchMapping("users/{id}")
-    public String update(@ModelAttribute("role") @Valid Role role,
-                         @ModelAttribute("user") @Valid User user,
-                         BindingResult bindingResult) {
+    public String update(@ModelAttribute("user") @Valid User user,
+                         BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("roleAdmin", userService.findRoleById(1));
+            model.addAttribute("roleUser", userService.findRoleById(2));
             return "edit";
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

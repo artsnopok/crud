@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @Size(min = 4, message = "Пароль должен содержать не менее 4 символов")
     private String password;
 
-    @NotEmpty
+    @NotEmpty(message = "Необходимо выбрать роль")
     @ManyToMany(cascade = {CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,

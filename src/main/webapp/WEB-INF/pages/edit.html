@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>Edit user</title>
+    <title>Изменение данных пользователя</title>
 </head>
 <body>
 <form th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.getId()})}" th:object="${user}">
@@ -26,13 +26,13 @@
     <input type="password" th:field="*{password}" id="password"/>
     <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span>
     <br/>
-    <input type="checkbox" th:field="*{roles}" th:text="ADMIN" th:value="${roleAdmin.getName()}">
-    <input type="checkbox" th:field="*{roles}" th:text="USER" th:value="${roleUser.getName()}">
-    <br/>
+    <input type="checkbox" th:field="*{roles}" th:text="Администратор" th:value="${roleAdmin.getName()}">
+    <input type="checkbox" th:field="*{roles}" th:text="Пользователь" th:value="${roleUser.getName()}">
+    <span style="color: red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">roles error</span>
     <br/>
     <input type="submit" value="Изменить!"/>
 </form>
-
+<br/>
 <br/>
 <form th:method="GET" th:action="@{/logout}">
     <input type="submit" value="Выйти"/>

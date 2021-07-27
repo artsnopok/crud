@@ -16,6 +16,7 @@ public interface UserService extends UserDetailsService {
     Role findRoleById(long id);
     Role findRoleByName(String name);
     User findUserByEmail(String email);
+    void refreshRoles(User user);
 
 }
 

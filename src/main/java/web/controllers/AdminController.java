@@ -53,6 +53,7 @@ public class AdminController {
             model.addAttribute("roleUser", userService.findRoleById(2));
             return "new";
         }
+        userService.refreshRoles(user);
         userService.save(user);
         return "redirect:/admin/users";
     }
@@ -73,6 +74,7 @@ public class AdminController {
             model.addAttribute("roleUser", userService.findRoleById(2));
             return "edit";
         }
+        userService.refreshRoles(user);
         userService.update(user);
         return "redirect:/admin/users";
     }

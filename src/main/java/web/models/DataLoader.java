@@ -3,8 +3,6 @@ package web.models;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import web.dao.RoleDao;
-import web.dao.UserDao;
 import web.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -26,12 +24,10 @@ public class DataLoader {
     @PostConstruct
     public void loadData() {
         userService.save(new User("admin", "fakeadmin", 0, "admin@admin.in",
-                bCryptPasswordEncoder.encode("admin"),
-                Collections.singleton(new Role("ROLE_ADMIN"))));
+                "admin", Collections.singleton(new Role("ROLE_ADMIN"))));
 
         userService.save(new User("user", "fakeuser", 0, "user@user.in",
-                bCryptPasswordEncoder.encode("user"),
-                Collections.singleton(new Role("ROLE_USER"))));
+                "user", Collections.singleton(new Role("ROLE_USER"))));
     }
 }
 

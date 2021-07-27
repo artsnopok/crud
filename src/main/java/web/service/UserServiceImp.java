@@ -1,6 +1,7 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,14 +18,14 @@ public class UserServiceImp implements UserService {
 
     private final UserDao userDao;
     private final RoleDao roleDao;
-
-
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Autowired
-    public UserServiceImp(UserDao userDao, RoleDao roleDao) {
+    public UserServiceImp(UserDao userDao, RoleDao roleDao, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDao = userDao;
         this.roleDao = roleDao;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -40,12 +41,17 @@ public class UserServiceImp implements UserService {
 
     @Override
     public boolean save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.save(user);
         return true;
     }
 
     @Override
     public boolean update(User user) {
+        if (user.getPassword().equals(userDao.show(user.getId()).getPassword())) {
+        } else {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
         userDao.update(user);
         return true;
     }

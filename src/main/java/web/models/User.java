@@ -2,6 +2,8 @@ package web.models;
 
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -40,11 +42,12 @@ public class User implements UserDetails {
     private String password;
 
     @NotEmpty(message = "Необходимо выбрать роль")
+    @Fetch(FetchMode.JOIN)
     @ManyToMany(cascade = {CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.DETACH },
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")

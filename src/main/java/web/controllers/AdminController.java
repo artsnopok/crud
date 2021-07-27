@@ -17,14 +17,10 @@ import javax.validation.Valid;
 @RequestMapping("/admin/")
 public class AdminController {
 
-
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
     private final UserService userService;
 
     @Autowired
-    public AdminController(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public AdminController(UserService userService) {
         this.userService = userService;
     }
 
@@ -57,7 +53,6 @@ public class AdminController {
             model.addAttribute("roleUser", userService.findRoleById(2));
             return "new";
         }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "redirect:/admin/users";
     }
@@ -78,7 +73,6 @@ public class AdminController {
             model.addAttribute("roleUser", userService.findRoleById(2));
             return "edit";
         }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.update(user);
         return "redirect:/admin/users";
     }

@@ -23,7 +23,7 @@
     <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</span>
     <br/>
     <label for="password">Введите password: </label>
-    <input type="password" th:field="*{password}" id="password"/>
+    <input type="text" th:field="*{password}" id="password"/>
     <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span>
     <br/>
     <input type="checkbox" th:field="*{roles}" th:text="Администратор" th:value="${roleAdmin.getName()}">

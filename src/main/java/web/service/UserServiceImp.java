@@ -80,11 +80,4 @@ public class UserServiceImp implements UserService {
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
-
-    @Override
-    public void refreshRoles(User user) {
-        Set<Role> refreshedRoles = new HashSet<>();
-        user.getRoles().forEach(r -> refreshedRoles.add(roleDao.findRoleByName(r.getName())));
-        user.setRoles(refreshedRoles);
-    }
 }
